@@ -15,16 +15,18 @@ public class ReductionOp {
         //    ---VARIANTA CLASICA---
         Integer max = getMaxOfTransactions(transactions);
         System.out.println(max);
+        System.out.println();
 
         //2. printeaza suma numerelor din lista
-        Optional<Integer> optionalSum = getSumOfNumbers(transactions);
+        Optional<Integer> optionalSum = findSumOfNumbers(transactions);
 //        if (optionalSum.isPresent()){
 //            System.out.println(optionalSum.get());
 //        }
         System.out.println("java8: " + optionalSum.orElse(0));
         //    ---VARIANTA CLASICA---
-        Integer sum = getSumOfNumbersClassic(transactions);
+        Integer sum = getSumOfNumbers(transactions);
         System.out.println(sum);
+        System.out.println();
 
         List<Employee> employeeList = new ArrayList<>();
         employeeList.add(new Employee("Alex", 23, 23000, "USA"));
@@ -36,11 +38,12 @@ public class ReductionOp {
         //-1.streem din lista de angajati
         //-2.mapam lista de angajati la lista de salarii
         //-3.folosim reduce pentru a calcula suma salarilor
-        System.out.println("java8: " + getSumOfSalary(employeeList).orElse(0));
+        System.out.println("java8: " + findSumOfSalary(employeeList).orElse(0));
         //    ---VARIANTA CLASICA---
-        System.out.println(getSumOfSalaryClassic(employeeList));
+        System.out.println(getSumOfSalary(employeeList));
     }
 
+    //ex1
     public static Optional<Integer> findMaxOfTransactions(List<Integer> transactions) {
         return transactions.stream()
                 .max((number1, number2) -> number1.compareTo(number2));
@@ -57,13 +60,14 @@ public class ReductionOp {
         return max;
     }
 
-    public static Optional<Integer> getSumOfNumbers(List<Integer> transactions) {
+    //ex2
+    public static Optional<Integer> findSumOfNumbers(List<Integer> transactions) {
         return transactions.stream()
                 .reduce((sum, transaction) -> sum + transaction);
     }
 
     //    ---VARIANTA CLASICA---
-    public static Integer getSumOfNumbersClassic(List<Integer> transactions) {
+    public static Integer getSumOfNumbers(List<Integer> transactions) {
         Integer sum = 0;
         for (Integer number : transactions) {
             sum += number;
@@ -71,13 +75,15 @@ public class ReductionOp {
         return sum;
     }
 
-    public static Optional<Integer> getSumOfSalary(List<Employee> employeeList) {
+    //ex3
+    public static Optional<Integer> findSumOfSalary(List<Employee> employeeList) {
         return employeeList.stream()
                 .map(employee -> employee.getSalary())
                 .reduce((sum, salary) -> sum + salary);
     }
+
     //    ---VARIANTA CLASICA---
-    public static Integer getSumOfSalaryClassic(List<Employee> employeeList) {
+    public static Integer getSumOfSalary(List<Employee> employeeList) {
         Integer sum = 0;
         for (Employee employee : employeeList) {
             sum += employee.getSalary();

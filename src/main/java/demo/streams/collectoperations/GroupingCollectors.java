@@ -1,8 +1,12 @@
-package demo.streams.helperclasses;
+package demo.streams.collectoperations;
 
 
-import java.io.ObjectInputFilter;
-import java.math.BigDecimal;
+import demo.streams.helperclasses.Account;
+import demo.streams.helperclasses.Employee;
+import demo.streams.helperclasses.Item;
+import demo.streams.helperclasses.Status;
+
+
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -16,35 +16,50 @@ public class FindingOp {
         list.add(new Person("Ray", 63, "China"));
         //1. printeaza prima persoana gasita din lista care este din India
         Optional<Person> foundPerson = findFirstPersonFrom(list);
-        System.out.println(foundPerson.orElse(new Person("", 0, "")));
+        System.out.println("java8: " + foundPerson.orElse(new Person("", 0, "")));
 //        ---VARIANTA CLASICA---
-//        Person foundPerson1 = findFirstPersonFrom(list);
-//        System.out.println(foundPerson1);
+        Person foundPerson1 = getFirstPersonFrom(list);
+        System.out.println(foundPerson1);
+        System.out.println();
 
         //2. printeaza o persoana din lista care este din India
-        Optional<Person> foundAnyPerson = findAnyPersonFrom(list);
-        System.out.println(foundAnyPerson.orElse(new Person("", 0, "")));
+        Optional<Person> foundAnyPerson = findAnyPersonFrom(list, "India");
+        System.out.println("java8: " + foundAnyPerson.orElse(new Person("", 0, "")));
+        //        ---VARIANTA CLASICA---
+        System.out.println(getAnyPersonFrom(list, "India"));
     }
 
+    //ex1
     public static Optional<Person> findFirstPersonFrom(List<Person> list) {
         return list.stream()
                 .filter(person -> person.getCountry().equals("India"))
                 .findFirst();
     }
 
-//        ---VARIANTA CLASICA---
-//    public static Person findFirstPersonFrom(List<Person> list) {
-//        for (Person person : list) {
-//            if (person.getCountry().equals("India")){
-//                return person;
-//            }
-//        }
-//        return new Person("", 0, "");
-//    }
+    //        ---VARIANTA CLASICA---
+    public static Person getFirstPersonFrom(List<Person> list) {
+        for (Person person : list) {
+            if (person.getCountry().equals("India")) {
+                return person;
+            }
+        }
+        return new Person("", 0, "");
+    }
 
-    public static Optional<Person> findAnyPersonFrom(List<Person> list) {
+    //ex2
+    public static Optional<Person> findAnyPersonFrom(List<Person> list, String country) {
         return list.stream()
-                .filter(person -> person.getCountry().equals("India"))
+                .filter(person -> person.getCountry().equals(country))
                 .findAny();
+    }
+
+    //        ---VARIANTA CLASICA---
+    public static Person getAnyPersonFrom(List<Person> list, String country) {
+        for (Person person : list) {
+            if (person.getCountry().equals(country)) {
+                return person;
+            }
+        }
+        return new Person("", 0, "");
     }
 }

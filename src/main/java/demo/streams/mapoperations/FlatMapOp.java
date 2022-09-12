@@ -36,11 +36,12 @@ public class FlatMapOp {
                 .filter(author -> author.startsWith(prefix))
                 .collect(Collectors.toList());
     }
+//TODO: nu pot introduce operatia finala .collect
 
 //    public static List<Book> getAllBooksByAuthorStartsWith(List<Book> javaBooks, String prefix) {
 //        return javaBooks.stream()
-//                .filter(book -> book.getAuthors()author.
-//                .collect(Collectors.toList());
+//                .filter(book -> book.getAuthors().contains(prefix)
+//
 //    }
 
 }
