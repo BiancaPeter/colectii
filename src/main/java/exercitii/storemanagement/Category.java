@@ -4,4 +4,5 @@ public enum Category {
     LACTATE,
     MEZELURI,
     LEGUMEFRUCTE
+
 }

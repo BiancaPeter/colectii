@@ -3,9 +3,9 @@ package exercitii.storemanagement;
 public class MainProduct {
     public static void main(String[] args) {
         Store store = new Store();
-        store.addProduct(new Product("lapte",7,Category.LACTATE));
-        store.addProduct(new Product("iaurt",5,Category.LACTATE));
-        store.addProduct(new Product("mere",6,Category.LEGUMEFRUCTE));
+        store.addProduct(new Product("lapte", 7, Category.LACTATE));
+        store.addProduct(new Product("iaurt", 5, Category.LACTATE));
+        store.addProduct(new Product("mere", 6, Category.LEGUMEFRUCTE));
 
         System.out.println(store.getProductsByCategory());
 
