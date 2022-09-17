@@ -1,12 +1,9 @@
 package exercitii.exercisesS17;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class MainEx1Ex2Ex3Ex5Ex1 {
+public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
     public static void main(String[] args) {
 //        Ex1. Suma numerelor pare:
 //        Calculeaza suma numerelor pare dintr-o lista de Integer-uri.
@@ -71,9 +68,50 @@ public class MainEx1Ex2Ex3Ex5Ex1 {
         int dayWithMinPriceOfActionUntilDayWithMaxPriceOfAction = getDayWithMinPriceOfActionUntilDayWithMaxPriceOfAction(pricesOfActions, dayWithMaxPriceOfAction);
         int maximumProfit = pricesOfActions.get(dayWithMaxPriceOfAction) - pricesOfActions.get(dayWithMinPriceOfActionUntilDayWithMaxPriceOfAction);
         System.out.println("Maximum profit is: " + maximumProfit);
+
+//        Ex2. Inlocuieste fiecare element dintr-un array cu produsul tuturor celorlalte elemente
+//        Exemplu:
+//          Input: { 1, 2, 3, 4, 5 }
+//          Output: { 120, 60, 40, 30, 24 }
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        System.out.println("The list with the product of all other elements is: " + getProductOfNumbersWithout(numbers));
+
+//        Ex3.Sa se verifice daca un array contine duplicate
+//        Exemplu:
+//           Input: [6,5,6,2,3,1]
+//           Output: true, pentru ca 6 apare de doua ori
+        List<Integer> numberList = Arrays.asList(6, 5, 6, 2, 3, 1);
+        if (containsDuplicates(numberList)) {
+            System.out.println("The list " + numberList + " contains duplicates");
+        } else {
+            System.out.println("The list " + numberList + " not contains duplicates");
+        }
+
+//        Ex4. Sunt afisate n-1 numere dintr-un interval de la 1 la n. Sa se gaseasca numarul care lipseste.
+//        Exemplu:
+//           Input: n=7, a=[3,2,1,6,5,7]
+//           Output: 4 - lipseste doar 4 din array.
+        int n = 7;
+        List<Integer> a = new ArrayList<>();
+        a.add(3);
+        a.add(2);
+        a.add(1);
+        a.add(6);
+        a.add(5);
+        a.add(7);
+        System.out.println("The number that is missing from the list is: " + getTheMissingNumber(a));
+        System.out.println("MAP: The number that is missing from the list is: " + findTheMissingNumber(a, n));
+
+//        Ex5. Grupeaza elementele dintr-un array astfel incat elementele duplicate sa fie unul langa altul
+//        Exemplu:
+//           Input: { 1, 2, 3, 1, 2, 1 }
+//           Output: { 1, 1, 1, 2, 2, 3 }
+        List<Integer> list = Arrays.asList(1, 2, 3, 1, 2, 1);
+        System.out.println("The list with duplicate elements next to each other is: " + getAListWithDuplicateElementsNextToEachOther(list));
     }
 
-        //Ex1
+
+    //Ex1
     public static Optional<Integer> returnSumOfEvenNumbers(List<Integer> numberList) {
         return numberList.stream()
                 .filter(number -> number % 2 == 0)
@@ -177,5 +215,87 @@ public class MainEx1Ex2Ex3Ex5Ex1 {
             }
         }
         return day;
+    }
+
+    //Ex2
+    public static List<Integer> getProductOfNumbersWithout(List<Integer> numbers) {
+        List<Integer> productOfNumbersWithout = new ArrayList<>();
+        for (int i = 0; i < numbers.size(); i++) {
+            productOfNumbersWithout.add(1);
+        }
+        for (int i = 0; i < numbers.size(); i++) {
+            for (int j = 0; j < numbers.size(); j++) {
+                if (!(i == j)) {
+                    productOfNumbersWithout.set(i, productOfNumbersWithout.get(i) * numbers.get(j));
+                }
+            }
+        }
+        return productOfNumbersWithout;
+    }
+
+    //Ex3
+    public static boolean containsDuplicates(List<Integer> numberList) {
+        Map<Integer, Integer> numberByApparition = new HashMap<>();
+        for (Integer number : numberList) {
+            if (!numberByApparition.containsKey(number)) {
+                numberByApparition.put(number, 1);
+            } else {
+                numberByApparition.put(number, numberByApparition.get(number) + 1);
+            }
+        }
+        if (numberList.size() == numberByApparition.size()) {
+            return false;
+        }
+        return true;
+    }
+
+    //Ex4
+    public static Integer getTheMissingNumber(List<Integer> a) {
+        Collections.sort(a);
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i + 1) - a.get(i) == 2) {
+                return a.get(i) + 1;
+            }
+        }
+        return 0;
+    }
+
+    public static Integer findTheMissingNumber(List<Integer> a, int n) {
+        Map<Integer, Integer> numberByApparition = new HashMap<>();
+        for (int number = 1; number <= n; number++) {
+            if (!numberByApparition.containsKey(number)) {
+                numberByApparition.put(number, 0);
+            }
+        }
+        for (Integer number : a) {
+            if (numberByApparition.containsKey(number)) {
+                numberByApparition.put(number, 1);
+            }
+        }
+        for (Integer number : numberByApparition.keySet()) {
+            if (numberByApparition.get(number).equals(0)) {
+                return number;
+            }
+        }
+        return 0;
+    }
+
+    //Ex5
+    public static List<Integer> getAListWithDuplicateElementsNextToEachOther(List<Integer> list) {
+        Map<Integer, Integer> numberByApparition = new HashMap<>();
+        List<Integer> listWithDuplicateElementsNextToEachOther = new ArrayList<>();
+        for (Integer number : list) {
+            if (!numberByApparition.containsKey(number)) {
+                numberByApparition.put(number, 1);
+            } else {
+                numberByApparition.put(number, numberByApparition.get(number) + 1);
+            }
+        }
+        for (Integer number : numberByApparition.keySet()) {
+            for (int i = 1; i <= numberByApparition.get(number); i++) {
+                listWithDuplicateElementsNextToEachOther.add(number);
+            }
+        }
+        return listWithDuplicateElementsNextToEachOther;
     }
 }
