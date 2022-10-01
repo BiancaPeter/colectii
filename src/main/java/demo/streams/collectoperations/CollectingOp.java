@@ -17,7 +17,8 @@ public class CollectingOp {
         employeeList.add(new Employee("Ryan", 53, 54000, "Libya"));
         //1. returneaza o lista cu numele tututor angajatilor din lista de angajati
         List<String> employeeNames = employeeList.stream()
-                .map(employee -> employee.getName())
+//              .map(employee -> employee.getName())
+                .map(Employee::getName)
                 .collect(Collectors.toList());
         System.out.println(employeeNames);
 

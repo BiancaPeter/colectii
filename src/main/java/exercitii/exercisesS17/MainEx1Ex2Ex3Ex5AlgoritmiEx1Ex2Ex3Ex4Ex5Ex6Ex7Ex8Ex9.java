@@ -3,7 +3,7 @@ package exercitii.exercisesS17;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
+public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5Ex6Ex7Ex8Ex9 {
     public static void main(String[] args) {
 //        Ex1. Suma numerelor pare:
 //        Calculeaza suma numerelor pare dintr-o lista de Integer-uri.
@@ -108,6 +108,103 @@ public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
 //           Output: { 1, 1, 1, 2, 2, 3 }
         List<Integer> list = Arrays.asList(1, 2, 3, 1, 2, 1);
         System.out.println("The list with duplicate elements next to each other is: " + getAListWithDuplicateElementsNextToEachOther(list));
+
+//        Ex6.Verifica daca un String poate fi derivat din alt String rotindu-l circular.
+//        Exemplu:
+//           Input: s1 = abcd
+//                  s2 = dabc
+//           Output: true, pentru ca s2 poate fi derivat din s1, rotind-se cu o unitate
+
+        System.out.println("The strings are circular: " + areCircularRotated("abcd", "cdab"));
+        System.out.println("The strings are circular: " + areCircularRotated("abcd", "cdba"));
+
+//      Second method
+//        String s = "abcd";
+//        String s2 = "cdab";
+//        String concatenated = s + s;
+//        if (concatenated.contains(s2)) {
+//            System.out.println("rotated");
+//        }
+
+
+//        Ex7. Gaseste diferenta maxima intre 2 numere dintr-o lista, astfel incat elementul mai mic sa apara inaintea elementului mai mare
+//        Exemplu:
+//            Input: [2,7,9,5,1,3,5]
+//	          Output: 7 (perechea de numere care indeplineste conditia este (2,9)
+
+        //scad fiecare numar din fiecare numar
+        //convertim fiecare diferenta in pozitiv
+        //comparam diferenta cu diferenta maxima
+
+        List<Integer> numbers1 = new ArrayList<>();
+        numbers1.add(2);
+        numbers1.add(7);
+        numbers1.add(9);
+        numbers1.add(5);
+        numbers1.add(1);
+        numbers1.add(3);
+        numbers1.add(5);
+        System.out.println("The maxim difference is " + getMaxDifference(numbers1));
+
+//        Ex8. Gaseste cea mai apropiata valoare de un anumit numar dintr-o lista de numere
+//        Exemplu:
+//           Input: [2,7,9,5,1,3,5], 8
+//           Output: 9 sau 7 sunt cele mai apropiate valori de 8
+
+        List<Integer> numbers2 = Arrays.asList(2, 7, 9, 5, 1, 3, 5);
+        Integer nr = 8;
+        System.out.println("The closest value of " + nr + ": ");
+        getTheClosestValueOf(numbers2, nr);
+        System.out.println();
+
+//        Ex9. Muta toate zero-urile dintr-un array la final
+//        Exemplu:
+//            Input: [6,0,8,2,3,0,4,0,1]
+//            Output: [6,8,2,3,4,1,0,0,0]
+        List<Integer> numbers3 = new ArrayList<>();
+        numbers3.add(6);
+        numbers3.add(0);
+        numbers3.add(8);
+        numbers3.add(2);
+        numbers3.add(3);
+        numbers3.add(0);
+        numbers3.add(4);
+        numbers3.add(0);
+        numbers3.add(1);
+        System.out.println("Array list with 0 elements at the end is: " + getTheListWith0ElementsAtTheEnd(numbers3));
+        System.out.println("Second method " + returnTheListWith0ElementsAtTheEnd(numbers3));
+
+//         Ex10. Gaseste un subarray, care sa aiba o anumita suma
+//         Un subarray are capatul din stanga inaintea capatului din dreapta in array-ul original.
+//         Array-ul original poate avea doar numere pozitive
+//         Exemplu:
+//             Input: [1, 4, 20, 3, 10, 5], sum = 33
+//             Output: suma a fost gasita intre indicii 2 si 4 (20+3+10=33)
+//             Input: [1, 4], sum = 0
+//             Output: nici un array nu a fost gasit
+        List<Integer> numbers4 = Arrays.asList(1, 4, 20, 3, 10, 5);
+        Integer sum = 33;
+        List<Integer> numbers5 = Arrays.asList(1, 4);
+        Integer sum1 = 0;
+        System.out.println("The array with a certain sum is: " + getArrayWithACertainSum(numbers4, sum));
+        System.out.println("The array with a certain sum is: " + getArrayWithACertainSum(numbers5, sum1));
+
+//         Ex11. Roteste un array la stanga  cu o pozitie
+//         Exemplu:
+//             Input: [1,2,3,4,5]
+//             Output: [5,1,2,3,4]
+//         Rezolva apoi problema in mod general, adic[ roteste un array cu n pozitii
+//         Exemplu:
+//             Input: [1,2,3,4,5]
+//             Output: [3,4,5,1,2] - array-ul s-arotit cu 2 pozitii
+        List<Integer> numbers6 = new ArrayList<>();
+        numbers6.add(1);
+        numbers6.add(2);
+        numbers6.add(3);
+        numbers6.add(4);
+        numbers6.add(5);
+        int numberOfRotation = 2;
+        System.out.println("The array rotated to the left by " + numberOfRotation + " positions is: " + getArrayRotatedToTheLeftBySpecifiedPositions(numbers6, numberOfRotation));
     }
 
 
@@ -218,6 +315,7 @@ public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
     }
 
     //Ex2
+
     public static List<Integer> getProductOfNumbersWithout(List<Integer> numbers) {
         List<Integer> productOfNumbersWithout = new ArrayList<>();
         for (int i = 0; i < numbers.size(); i++) {
@@ -225,7 +323,7 @@ public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
         }
         for (int i = 0; i < numbers.size(); i++) {
             for (int j = 0; j < numbers.size(); j++) {
-                if (!(i == j)) {
+                if ((i != j)) {
                     productOfNumbersWithout.set(i, productOfNumbersWithout.get(i) * numbers.get(j));
                 }
             }
@@ -261,19 +359,17 @@ public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
     }
 
     public static Integer findTheMissingNumber(List<Integer> a, int n) {
-        Map<Integer, Integer> numberByApparition = new HashMap<>();
+        Map<Integer, Boolean> numberByApparition = new HashMap<>();
+//        for (int number = 1; number <= n; number++) {
+//            if (!numberByApparition.containsKey(number)) {
+//                numberByApparition.put(number, 0);
+//            }
+//        }
+        for (Integer number : a) {
+            numberByApparition.put(number, true);
+        }
         for (int number = 1; number <= n; number++) {
             if (!numberByApparition.containsKey(number)) {
-                numberByApparition.put(number, 0);
-            }
-        }
-        for (Integer number : a) {
-            if (numberByApparition.containsKey(number)) {
-                numberByApparition.put(number, 1);
-            }
-        }
-        for (Integer number : numberByApparition.keySet()) {
-            if (numberByApparition.get(number).equals(0)) {
                 return number;
             }
         }
@@ -297,5 +393,157 @@ public class MainEx1Ex2Ex3Ex5AlgoritmiEx1Ex2Ex3Ex4Ex5 {
             }
         }
         return listWithDuplicateElementsNextToEachOther;
+    }
+
+    //Ex6
+    public static boolean areCircularRotated(String word1, String word2) {
+        for (int i = 0; i < word1.length(); i++) {
+            word1 = word1.substring(1) + word1.charAt(0);
+            if (word1.equals(word2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Ex7
+    public static int getMaxDifference(List<Integer> numbers) {
+        int maxDifference = 0;
+        int firstNumberPosition = 0;
+        int secondNumberPosition = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            for (int j = i + 1; j < numbers.size(); j++) {
+                if (numbers.get(i) < numbers.get(j)) {
+//                    if (maxDifference < Math.abs(numbers.get(i) - numbers.get(j))) {
+//                        maxDifference = Math.abs(numbers.get(i) - numbers.get(j));
+//                    }
+                    if (numbers.get(j) - numbers.get(i) > maxDifference) {
+                        maxDifference = numbers.get(j) - numbers.get(i);
+                        firstNumberPosition = i;
+                        secondNumberPosition = j;
+                    }
+//                    maxDifference = Integer.max(maxDifference, numbers.get(j) - numbers.get(i));
+                }
+            }
+        }
+        System.out.println(numbers.get(firstNumberPosition) + " " + numbers.get(secondNumberPosition));
+        return maxDifference;
+    }
+
+    //Ex8
+    //scad nr din fiecare element din lista
+    //convertesc fiecare diferenta la pozitiv
+    //compar diferenta cu diferenta minima
+    //dupa ce am gasit diferenta minima parcurg din nou lista si afisez acele elemente care
+    //daca sunt scazute din nr dat (rezultat convertit la pozitiv) dau valoarea egala cu diferenta
+    // minima gasita
+    public static void getTheClosestValueOf(List<Integer> numbers, Integer nr) {
+        int minDifference = Integer.MAX_VALUE;
+        for (int i = 0; i < numbers.size(); i++) {
+            minDifference = Integer.min(minDifference, Math.abs(nr - numbers.get(i)));
+        }
+        for (int i = 0; i < numbers.size(); i++) {
+            if (Math.abs(nr - numbers.get(i)) == minDifference) {
+                System.out.print(numbers.get(i) + " ");
+            }
+        }
+    }
+
+    //Ex9
+
+    //caut elementele egale cu 0 si contorizez  numarul lor
+    //in acelasi timp introduc introduc in lista noua elementele diferite de 0
+    //la final adaug in noua lista si elementele egale cu zero
+    public static List<Integer> getTheListWith0ElementsAtTheEnd(List<Integer> numbers) {
+        List<Integer> listWith0ElementsAtTheEnd = new ArrayList<>();
+        int count = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.get(i) == 0) {
+                count++;
+            } else {
+                listWith0ElementsAtTheEnd.add(numbers.get(i));
+            }
+        }
+        for (int i = 1; i <= count; i++) {
+            listWith0ElementsAtTheEnd.add(0);
+        }
+        return listWith0ElementsAtTheEnd;
+    }
+
+    //pentru fiecare element din lista verific daca elementul este egal cu 0 si daca elementele urmatoare
+    //din lista sunt diferite de 0
+    //daca se respecta conditia, inversez elementul curent cu elementele urmatoare care sunt diferite de 0
+    public static List<Integer> returnTheListWith0ElementsAtTheEnd(List<Integer> numbers) {
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            for (int j = i + 1; j < numbers.size(); j++) {
+                if ((numbers.get(i) == 0) && (numbers.get(i) - numbers.get(j) != 0)) {
+                    numbers.set(i, numbers.get(j));
+                    numbers.set(j, 0);
+                }
+            }
+        }
+//        int k = 0;
+//        for (int i = 0; i < numbers.size(); i++){
+//            if (numbers.get(i)!=0){
+//                numbers.set(k,numbers.get(i));
+//                k++;
+//            }
+//        }
+//        for (int i=k; i<numbers.size(); i++){
+//            numbers.set(i,0);
+//        }
+        return numbers;
+    }
+
+    //Ex10
+
+    //vom determina capatul din stanga pt fiecare subarray parcurgand array-ul original de la indexul 0
+    //    pana la penultimul index
+    //pentru fiecare capat din stanga vom determina capetele din dreapta parcurgand array-ul original
+    //    de la indexul capatului din stanga+1 pana la ultimul index din array-ul original
+    //avand la dispozitie capetele stanga dreapta pentru fiecare subarray-ul, determinam pe rand fiecare
+    //    subarray si calculam suma elementelor
+    //daca suma elementelor este cea cautata returnam subarray-ul curent
+    //altfel stergem elementele din subarray-ul curent, initializam computSum cu 0 si trecem la subarray-ul urmator
+    public static List<Integer> getArrayWithACertainSum(List<Integer> numbers, Integer sum) {
+        List<Integer> subarray = new ArrayList<>();
+        Integer computeSum = 0;
+        for (int i = 0; i <= numbers.size() - 2; i++) {
+            for (int j = i + 1; j <= numbers.size() - 1; j++) {
+                for (int x = i; x <= j; x++) {
+                    subarray.add(numbers.get(x));
+                    computeSum += numbers.get(x);
+                }
+                if (computeSum == sum) {
+                    return subarray;
+                }
+                subarray.clear();
+                computeSum = 0;
+            }
+        }
+        return subarray;
+    }
+
+    //Ex11
+    //pentru fiecare rotatie:
+    //retinem ultima valoare din lista intr-o variabila
+    //parcurgem lista de la sfarsit spre inceput, incepand cu penultimul element pana la primul element
+    //elementul curent il atribuim elementului cu index-ul mai mare cu o unitate fata de indexul elementului curent
+    //primul element va primi valoarea ultimului element din lista initiala, retinuta la inceput intr-o variabila
+    public static List<Integer> getArrayRotatedToTheLeftBySpecifiedPositions(List<Integer> numbers, int numberOfRotation) {
+        Integer lastValue;
+        for (int x = 1; x <= numberOfRotation; x++) {
+            rotateArrayByOne(numbers);
+        }
+        return numbers;
+    }
+
+    private static void rotateArrayByOne(List<Integer> numbers) {
+        Integer lastValue;
+        lastValue = numbers.get(numbers.size() - 1);
+        for (int i = numbers.size() - 2; i >= 0; i--) {
+            numbers.set(i + 1, numbers.get(i));
+        }
+        numbers.set(0, lastValue);
     }
 }

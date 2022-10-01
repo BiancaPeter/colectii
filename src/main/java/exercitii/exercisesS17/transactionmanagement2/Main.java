@@ -34,11 +34,13 @@ public class Main {
         System.out.println(returnSumOfCanceledTransaction(accountList));
     }
 
-    public static long getSumOfCanceledTransaction(List<Account> accountList) {
+    public static Integer getSumOfCanceledTransaction(List<Account> accountList) {
         return accountList.stream()
                 .filter(account -> account.getBalance() > 0)
                 .flatMap(account -> account.getTransactionList().stream())
                 .filter(transaction -> transaction.getState().equals(State.CANCELED))
+                //.map(transaction -> transaction.getAmount())
+                //.reduce((sum, amount) -> sum + amount);
                 .collect(Collectors.summingInt(transaction -> transaction.getAmount()));
     }
 

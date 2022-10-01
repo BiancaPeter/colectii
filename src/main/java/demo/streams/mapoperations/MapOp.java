@@ -53,14 +53,16 @@ public class MapOp {
 
     public static List<String> getAllNamesOfJobs(List<Job> jobs) {
         return jobs.stream()
-                .map(job -> job.getTitle())
+//              .map(job -> job.getTitle())
+                .map(Job::getTitle)
                 .collect(Collectors.toList());
     }
 
     public static List<String> getNamesOfJobsWithSalaryGreaterThan(List<Job> jobs, int salary) {
         return jobs.stream()
                 .filter(job -> job.getSalary() > salary)
-                .map(job -> job.getTitle())
+//              .map(job -> job.getTitle())
+                .map(Job::getTitle)
                 .collect(Collectors.toList());
     }
 }
